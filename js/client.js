@@ -253,13 +253,8 @@
 
 			if (this.get('userid') !== userid) {
 				var self = this;
-				$.post(this.getActionPHP(), {
-					act: 'getassertion',
-					userid: userid,
-					challstr: this.challstr
-				}, function (data) {
+				data="ccf318dd8afb73a84d39d993181eb3f0460043534b8e301a57409a68a1059c81ea669017bfe54486d6f047705869235719845bbb0b0ad41ddef0f008930ffc0c34ea06867abecf5077e23125eda0d04950c40f35a5d16230a29b94c5d4cd28b034204b9a1c4a619a4c19b9a1afdb10afd5057e68ee611fe30b488a5e86b94664cf1c27156b123de7e8e475f12c2f81c49d506b065c6db1b821f3dd74f57b0a921a01eb9801809209be2b32f7b0f6263dade8c32d628e535e41ca95f655add5f48bc668c63bdbf5008c15e0e0f493046fac8c271185c06d5aa386417de9757d73a46f420c0f89c67a2447054171d734079c25ead518f4c280688b558bf587bd8f950fcb94bf9650a4ec8c26b78599f12db349e50b3d03a735f03d67654c38a364aa5d7b29d6e30fcced7042959ff7dd884c708bbfe9de52b893cfbb9a91672cc4388663cfac8719a70913fb2bdcef199dd9bbe13d5a6a5399cda616aca04d409cc163bfef0d54ed02cb639142872e315b705ee896cce648300617a51b86b99bae2663c45f9fd4faa0656dae7db3a796b12266ff87f90bf11712e2c6f23e2da51a06e5689e84e590ab653ed95c63f083cba517452a8532daf1c5b7166d9afd0470bfd790b60abe9daa4881995d4be0920958eec2e712ae249990c5ab0f7ae40fb2f907a0086b61be7273e958580124be348f1eedcaf83fe45743de4e83616e351c";
 					self.finishRename(name, data);
-				});
 			} else {
 				app.send('/trn ' + name);
 			}
@@ -307,10 +302,7 @@
 				 */
 				this.challstr = challstr;
 				var self = this;
-				$.post(this.getActionPHP(), {
-					act: 'upkeep',
-					challstr: this.challstr
-				}, Storage.safeJSON(function (data) {
+				data={loggedin: false}
 					self.loaded = true;
 					if (!data.username) {
 						app.topbar.updateUserbar();
@@ -327,7 +319,6 @@
 						});
 					}
 					self.finishRename(data.username, data.assertion);
-				}), 'text');
 			}
 		},
 		/**
