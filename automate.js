@@ -44,42 +44,34 @@ window.addEventListener("message", function(event) {
 		$(".challenge>.battleform>p>.select.formatselect").click();
 		$('[value="gen7ou"]').click();
 		$(".buttonbar>button").click();
+			setTimeout(()=>{
+				$(".buttonbar>button").click();
+				setTimeout(()=>{
+
+					let only_once=false;
+					//Check end battle
+					$('.battle-log').bind("DOMSubtreeModified",function(){
+						if(only_once){
+							return;
+						}
+					  if($(".battle-log>.inner>.battle-history:last").text().includes("won the battle!")){
+						console.log("ended");
+						  only_once=true;
+						  if($(".leftbar>.trainer>strong").first().text()==$(".battle-log>.inner>.battle-history:last>strong").text()){
+							  window.parent.postMessage("winner", "*");
+						  }
+						  else{
+							  window.location="https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+						  }
+					  }
+					});
+
+
+				}, 2000);
+			}, 1000);
 		}, 100);
 
 	}
 
 });
 
-/*
-//Accept
-$(".buttonbar>button").click();
-
-
-
-
-
-//Check winner
-//You
-$(".leftbar>.trainer>strong").first().text()
-//Winner
-$(".battle-log>.inner>.battle-history:last>strong").text()
-
-
-
-//Check end battle
-$('.battle-log').bind("DOMSubtreeModified",function(){
-  if($(".battle-log>.inner>.battle-history:last").text().includes("won the battle!")){
-	console.log("ended");
-  }
-});
-
-
-
-
-
-
-
-//Useless
-//Select team
-$('.teamselect:not(.preselected)').click()
-*/
